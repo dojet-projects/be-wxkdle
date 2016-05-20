@@ -16,7 +16,7 @@ class WeixinAction extends WeixinBaseAction {
     }
 
     protected function respondJoke() {
-        $joke = DalJoke::getJoke();
+        $joke = LibJoke::getNextJoke($this->fromUser);
         $this->respondText($joke['joke']);
     }
 

@@ -7,20 +7,32 @@ define('CONFIG', PRJ.'config/');
 define('MODEL', PRJ.'model/');
 define('DATA', PRJ.'data/');
 
+Config::loadConfig(CONFIG.'constant');
 Config::loadConfig(CONFIG.'runtime');
 Config::loadConfig(CONFIG.'route');
 Config::loadConfig(CONFIG.'database');
+Config::loadConfig(CONFIG.'redis');
 // Config::loadConfig(CONFIG.'fileupload');
 
 DAutoloader::getInstance()->addAutoloadPathArray(
     array(
         dirname(__FILE__).'/dal/',
+        dirname(__FILE__).'/lib/',
+    )
+);
+
+$rc = Config::runtimeConfigForKeyPath('redis.server');
+DRedis::init(array(
+    'host' => $rc['hosts'][0],
+    'port' => $rc['port'],
+    'password' => $rc['password'],
+    'timeout' => $rc['timeout'],
+    'key_prefix' => Config::configForKeyPath('redis.keyprefix'),
     )
 );
 
 Dojet::addModule(__DIR__.'/../mod-weixin');
-
-ModuleWeixin::init(array());
+ModuleWeixin::init(array('token' => ''));
 
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);
 // ModuleFileUpload::setUploadRoot(Config::runtimeConfigForKeyPath('fileupload.upload'));

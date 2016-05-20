@@ -23,4 +23,14 @@ class DalJoke extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
+    public static function getNextJoke($id) {
+        DAssert::assertNumeric($id);
+        $sql = "SELECT *
+                FROM jokes
+                WHERE id>$id
+                ORDER BY id
+                LIMIT 1";
+        return self::rs2rowline($sql);
+    }
+
 }
