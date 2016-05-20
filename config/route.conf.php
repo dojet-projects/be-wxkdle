@@ -3,6 +3,6 @@
 Dispatcher::loadRoute(
     array(
         '/^$/' => UI.'HomeAction',
-        '/^weixin$/' => UI.'WeixinAction',
+        '/^weixin/' => UI.'WeixinAction',
     )
 );
