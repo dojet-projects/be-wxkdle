@@ -12,6 +12,7 @@ Config::loadConfig(CONFIG.'runtime');
 Config::loadConfig(CONFIG.'route');
 Config::loadConfig(CONFIG.'database');
 Config::loadConfig(CONFIG.'redis');
+Config::loadConfig(CONFIG.'weixin');
 // Config::loadConfig(CONFIG.'fileupload');
 
 DAutoloader::getInstance()->addAutoloadPathArray(
@@ -32,7 +33,7 @@ DRedis::init(array(
 );
 
 Dojet::addModule(__DIR__.'/../mod-weixin');
-ModuleWeixin::init(array('token' => '263ec41097754ab60807'));
+ModuleWeixin::init(array('token' => Config::runtimeConfigForKeyPath('weixin.token')));
 
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);
 // ModuleFileUpload::setUploadRoot(Config::runtimeConfigForKeyPath('fileupload.upload'));
