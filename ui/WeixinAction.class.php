@@ -17,7 +17,10 @@ class WeixinAction extends WeixinBaseAction {
 
     protected function respondJoke() {
         $joke = LibJoke::getNextJoke($this->fromUser);
-        $this->respondText($joke['joke']);
+        $this->respondTextNews(array(
+            MWeixinNews::news('', $joke['joke'], '', ''),
+            )
+        );
     }
 
 }
