@@ -32,7 +32,7 @@ DRedis::init(array(
 );
 
 Dojet::addModule(__DIR__.'/../mod-weixin');
-ModuleWeixin::init(array('token' => ''));
+ModuleWeixin::init(array('token' => '263ec41097754ab60807'));
 
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);
 // ModuleFileUpload::setUploadRoot(Config::runtimeConfigForKeyPath('fileupload.upload'));
