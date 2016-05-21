@@ -10,7 +10,7 @@
 class WeixinAction extends WeixinBaseAction {
 
     protected function receivedText($postObj, $text) {
-        if (in_array($text, array('xh', '笑话'))) {
+        if (in_array(strtolower($text), array('xh', '笑话'))) {
             return $this->respondJoke();
         }
     }
