@@ -9,6 +9,12 @@
  */
 class WeixinAction extends WeixinBaseAction {
 
+    protected function received_event($postObj, $event, $eventKey) {
+        if ($event == 'subscribe') {
+            $this->respondText('hi，发送“xh”，我就能回复一条笑话给你。');
+        }
+    }
+
     protected function receivedText($postObj, $text) {
         if (in_array(strtolower($text), array('xh', '笑话'))) {
             return $this->respondJoke();
