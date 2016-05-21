@@ -17,7 +17,7 @@ class WeixinAction extends WeixinBaseAction {
 
     protected function respondJoke() {
         $joke = LibJoke::getNextJoke($this->fromUser);
-        $text = sprintf("%s\n=================\n关注公众号“玩笑开大了”\n回复“xh”看笑话", $joke['joke']);
+        $text = sprintf("%s\n=================\n关注公众号“<a href='http://www.baidu.com'>玩笑开大了</a>”\n回复“xh”看笑话", $joke['joke']);
         // $this->respondTextNews(array(
         //     MWeixinNews::news('', $joke['joke'], '', ''),
         //     )
