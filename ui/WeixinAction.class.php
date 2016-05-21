@@ -17,11 +17,12 @@ class WeixinAction extends WeixinBaseAction {
 
     protected function respondJoke() {
         $joke = LibJoke::getNextJoke($this->fromUser);
+        $text = sprintf("%s\n========\n回复“xh”继续", $joke['joke']);
         // $this->respondTextNews(array(
         //     MWeixinNews::news('', $joke['joke'], '', ''),
         //     )
         // );
-        $this->respondText($joke['joke']);
+        $this->respondText($text);
     }
 
 }
