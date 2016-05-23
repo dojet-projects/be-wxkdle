@@ -15,6 +15,11 @@ class WeixinAction extends WeixinBaseAction {
         }
     }
 
+    protected function receivedUnknown($postObj) {
+        Trace::debug('unknown received:');
+        Trace::debug(var_export($postObj, true));
+    }
+
     protected function receivedText($postObj, $text) {
         if (in_array(strtolower($text), array('xh', '笑话'))) {
             return $this->respondJoke();
