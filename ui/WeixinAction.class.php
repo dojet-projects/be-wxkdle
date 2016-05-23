@@ -19,6 +19,8 @@ class WeixinAction extends WeixinBaseAction {
         if (in_array(strtolower($text), array('xh', '笑话'))) {
             return $this->respondJoke();
         }
+
+        $this->respondText("已收到！\n回复“xh”无数笑话等着你");
     }
 
     protected function respondJoke() {
