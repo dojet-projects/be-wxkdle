@@ -15,14 +15,6 @@ class DalJoke extends MysqlDal {
         return DBWXKDLE;
     }
 
-    public static function getJoke() {
-        $sql = "SELECT *
-                FROM jokes
-                ORDER BY RAND()
-                LIMIT 1";
-        return self::rs2rowline($sql);
-    }
-
     public static function getNextJoke($id) {
         DAssert::assertNumeric($id);
         $sql = "SELECT *
