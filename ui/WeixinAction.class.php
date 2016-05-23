@@ -9,7 +9,7 @@
  */
 class WeixinAction extends WeixinBaseAction {
 
-    protected function received_event($postObj, $event, $eventKey) {
+    protected function receivedEvent($postObj, $event, $eventKey) {
         Trace::debug($event);
         Trace::debug($eventKey);
         if ($event == 'subscribe') {
