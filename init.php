@@ -8,8 +8,8 @@ define('MODEL', PRJ.'model/');
 define('DATA', PRJ.'data/');
 
 Config::loadConfig(CONFIG.'constant');
-Config::loadConfig(CONFIG.'global');
 Config::loadConfig(CONFIG.'runtime');
+Config::loadConfig(CONFIG.'global');
 Config::loadConfig(CONFIG.'route');
 Config::loadConfig(CONFIG.'database');
 Config::loadConfig(CONFIG.'redis');
