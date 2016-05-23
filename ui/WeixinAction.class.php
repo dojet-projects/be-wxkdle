@@ -10,8 +10,7 @@
 class WeixinAction extends WeixinBaseAction {
 
     protected function receivedEvent($postObj, $event, $eventKey) {
-        Trace::debug($event);
-        Trace::debug($eventKey);
+        Trace::debug('received event: '.$event.' key:'.$eventKey);
         if ($event == 'subscribe') {
             $this->respondText('hi，发送“xh”，我就能回复一条笑话给你。');
         }
