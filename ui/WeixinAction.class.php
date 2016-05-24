@@ -11,11 +11,13 @@ class WeixinAction extends WeixinBaseAction {
 
     protected function receivedEvent($postObj, $event, $eventKey) {
         Trace::debug('received event: '.$event.' key:'.$eventKey);
-        if ($event == 'subscribe') {
+        if ('subscribe' === $event) {
             // $this->respondText('hi，发送“xh”，我就能回复一条笑话给你。');
             $text = $this->riddleText();
             $text = "hi，看笑话发送“xh”\n=================\n先来个脑筋急转弯>>\n".$text;
             return $this->respondText($text);
+        } elseif ('unsubscribe' === $event) {
+            LibRiddle::removeUserRiddle($this->fromUser);
         }
     }
 

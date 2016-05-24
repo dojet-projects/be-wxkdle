@@ -23,6 +23,11 @@ class LibRiddle {
         return $status;
     }
 
+    public static function removeUserRiddle($openid) {
+        $key = self::userKey($openid);
+        DRedis::del($key);
+    }
+
     public static function getAnswer($openid) {
         $key = self::userKey($openid);
         $id = DRedis::hget($key, 'id');
