@@ -24,9 +24,25 @@ class WeixinAction extends WeixinBaseAction {
     protected function receivedText($postObj, $text) {
         if (in_array(strtolower($text), array('xh', '笑话'))) {
             return $this->respondJoke();
+        } elseif (in_array(strtolower($text), array('z'))) {
+            return $this->respondRiddle();
         }
 
         $this->respondText("已收到！\n回复“xh”无数笑话等着你");
+    }
+
+    protected function respondRiddle() {
+        $status = LibRiddle::getUserRiddleStatus($this->fromUser);
+        if ('riddle' === $status) {
+            // get answer
+            $riddle = LibRiddle::getAnswer($this->fromUser);
+            $text = $riddle['answer'];
+        } else {
+            // next
+            $riddle = LibRiddle::getNextRiddle($this->fromUser);
+            $text = $riddle['riddle'];
+        }
+        $this->respondText($text);
     }
 
     protected function respondJoke() {
