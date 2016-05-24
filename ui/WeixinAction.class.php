@@ -14,7 +14,7 @@ class WeixinAction extends WeixinBaseAction {
         if ($event == 'subscribe') {
             // $this->respondText('hi，发送“xh”，我就能回复一条笑话给你。');
             $text = $this->riddleText();
-            $text = "hi，看笑话发送“xh”\n先来个脑筋急转弯>>\n".$text;
+            $text = "hi，看笑话发送“xh”\n=================\n先来个脑筋急转弯>>\n".$text;
             return $this->respondText($text);
         }
     }
