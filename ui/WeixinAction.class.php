@@ -12,7 +12,10 @@ class WeixinAction extends WeixinBaseAction {
     protected function receivedEvent($postObj, $event, $eventKey) {
         Trace::debug('received event: '.$event.' key:'.$eventKey);
         if ($event == 'subscribe') {
-            $this->respondText('hi，发送“xh”，我就能回复一条笑话给你。');
+            // $this->respondText('hi，发送“xh”，我就能回复一条笑话给你。');
+            $text = $this->riddleText();
+            $text = "hi，看笑话发送“xh”\n先来个脑筋急转弯>>\n".$text;
+            return $this->respondText($text);
         }
     }
 
@@ -24,24 +27,29 @@ class WeixinAction extends WeixinBaseAction {
     protected function receivedText($postObj, $text) {
         if (in_array(strtolower($text), array('xh', '笑话'))) {
             return $this->respondJoke();
-        } elseif (in_array(strtolower($text), array('z'))) {
+        } elseif (in_array(strtolower($text), array('n'))) {
             return $this->respondRiddle();
         }
 
-        $this->respondText("已收到！\n回复“xh”无数笑话等着你");
+        $this->respondText("已收到！\n回复“xh”无数笑话等着你\n回复“n”脑筋急转弯");
     }
 
-    protected function respondRiddle() {
+    protected function riddleText() {
         $status = LibRiddle::getUserRiddleStatus($this->fromUser);
         if ('riddle' === $status) {
             // get answer
-            $riddle = LibRiddle::getAnswer($this->fromUser);
-            $text = $riddle['answer'];
+            $text = LibRiddle::getAnswer($this->fromUser);
+            $text.= "\n=================\n回复“n”继续";
         } else {
             // next
-            $riddle = LibRiddle::getNextRiddle($this->fromUser);
-            $text = $riddle['riddle'];
+            $text = LibRiddle::getNextRiddle($this->fromUser);
+            $text.= "\n=================\n回复“n”看答案";
         }
+        return $text;
+    }
+
+    protected function respondRiddle() {
+        $text = $this->riddleText();
         $this->respondText($text);
     }
 

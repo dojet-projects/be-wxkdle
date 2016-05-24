@@ -13,11 +13,6 @@ class LibRiddle {
         return sprintf('h:riddle:user:openid:%s', $openid);
     }
 
-    public static function getUserRiddleID($openid) {
-        $key = self::userKey($openid);
-        $id = DRedis::hget($key, 'id');
-    }
-
     public static function getUserRiddleStatus($openid) {
         $key = self::userKey($openid);
         $status = DRedis::hget($key, 'status');
@@ -38,20 +33,8 @@ class LibRiddle {
             $id = $riddle['id'];
         }
         DRedis::hset($key, 'status', 'answered');
-        return $riddle;
-    }
 
-    public static function getUserRiddle($openid) {
-        $key = self::userKey($openid);
-        $id = DRedis::hget($key, 'id');
-        if ($id) {
-            $riddle = DalRiddle::getRiddle($id);
-        } else {
-            $riddle = DalRiddle::getFirstRiddle();
-            $id = $riddle['id'];
-        }
-        DRedis::hset($key, 'status', 'answered');
-        return $riddle;
+        return $riddle['answer'];
     }
 
     public static function getNextRiddle($openid) {
@@ -70,7 +53,7 @@ class LibRiddle {
         DRedis::hset($key, 'id', $nextid);
         DRedis::hset($key, 'status', 'riddle');
 
-        return $riddle;
+        return $riddle['riddle'];
     }
 
 }
