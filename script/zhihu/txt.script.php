@@ -20,10 +20,10 @@ exit();
 function dig($id) {
     $filename = realpath('./tags/question/'.$id);
     $html = file_get_contents($filename);
-    $page = '';
+    $page = sprintf("url: http://www.zhihu.com/question/%s\n", $id);
     if (preg_match('/<h2 class="zm-item-title zm-editable-content">([\s\S]*?)<\/h2>/', $html, $reg)) {  // title
         $txt = trim($reg[1]);
-        $page.= "标题：".$txt."\n";
+        $page.= "\n标题：".$txt."\n";
     }
     if (preg_match('/<div class="zm-editable-content">([\s\S]*?)<\/div>/', $html, $reg)) {  // content
         $txt = trim($reg[1]);

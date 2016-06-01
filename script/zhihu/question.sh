@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in {4000..4020}
+for i in {1..7800}
 do 
     printf "\r$i"
     
